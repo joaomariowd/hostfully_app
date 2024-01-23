@@ -4,7 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        yellow: "#ffd700",
+        gold: "#ffd700",
+        primary: "#bad0e3",
+        "primary-light": "#dbe9f6",
+        "primary-dark": "#8eb4d9",
+        secondary: "#feee7d",
+        "secondary-light": "#fefa9c",
+        paper: "#ffffdc",
       }
     },
   },

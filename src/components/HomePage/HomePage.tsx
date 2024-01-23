@@ -1,11 +1,19 @@
 import React from 'react';
+import properties from '../../../data/properties.json';
+import { GiBlockHouse } from 'react-icons/gi';
 
 const HomePage: React.FC = () => {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the home page.</p>
+    <>
+    <div className="flex align-middle">
+      <GiBlockHouse className="text-primary-dark mr-2 w-8 h-auto" />
+      <h1>Available Properties</h1>
     </div>
+    
+    {properties.map((property) => (
+      <p key={property.id}>{property.title}</p> 
+    ))}
+    </>
   );
 };
 
