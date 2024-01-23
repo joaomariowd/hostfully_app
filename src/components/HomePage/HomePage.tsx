@@ -2,7 +2,6 @@ import React from 'react';
 import properties from '../../../data/properties.json';
 import { GiBlockHouse } from 'react-icons/gi';
 import { PropertyCard } from '..';
-import { propertyImage } from '../../utilities';
 
 const HomePage: React.FC = () => {
   return (
