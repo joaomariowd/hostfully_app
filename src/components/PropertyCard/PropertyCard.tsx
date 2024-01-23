@@ -2,6 +2,7 @@ import React from 'react';
 import { formatCurrency, propertyImage } from '../../utilities';
 import { Property } from '../../@types/Property';
 import { IoLocationSharp } from 'react-icons/io5';
+import { Button } from '@mui/material';
 
 type PropertyCardProps = {
   property: Property;
@@ -21,7 +22,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         </p>
         <p className="text-neutral-700 text-base">{property.description}</p>
       </div>
-      <div className="px-6 py-4">
+      <div className="px-6 py-4 flex align-middle justify-between">
+        <Button variant='contained' color='primary' size='small'>Book Now</Button>
         <span className="inline-block bg-secondary rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{formatCurrency(property.price)}</span>
       </div>
     </div>
