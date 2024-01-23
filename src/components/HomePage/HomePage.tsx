@@ -9,7 +9,7 @@ import { propertyTypes } from '../../utilities';
 const HomePage: React.FC = () => {
   const [filterValue, setFilterValue] = useState<string>('all');
   const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
-  const types = useMemo(() => propertyTypes(), []);
+  const types = useMemo(() => propertyTypes(properties), [properties]);
 
   const handleFilterChange = (e: SelectChangeEvent) => {
     setFilterValue(e.target.value);
