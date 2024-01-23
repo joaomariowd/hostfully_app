@@ -4,6 +4,7 @@ import { GiBlockHouse } from 'react-icons/gi';
 import { ItemsSelect as PropertyTypeFilter, PropertyCard } from '..';
 import { Property } from '../../@types/Property';
 import { SelectChangeEvent } from '@mui/material';
+import { propertyTypes } from '../../utilities';
 
 const HomePage: React.FC = () => {
   const [filterValue, setFilterValue] = useState<string>('all');
@@ -22,7 +23,7 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-    <div className="flex justify-between align-middle mt-6">
+    <div className="flex flex-col md:flex-row justify-between align-middle mt-2 md:mt-4 lg:mt-6 mb-8 md:mb-0">
         <h1 className='w-fit'>
           <GiBlockHouse className="text-neutral-700 mr-2 w-8 h-auto mb-2 inline-block" />
           Available Properties
@@ -30,11 +31,7 @@ const HomePage: React.FC = () => {
         <PropertyTypeFilter
           title='Type'
           label='type'
-          list={[
-            { text: 'all', title: 'All' },
-            { text: 'house', title: 'House' },
-            { text: 'loft', title: 'Loft' },
-          ]}
+          list={propertyTypes()}
           handleChange={handleFilterChange}
           value={filterValue}
         />

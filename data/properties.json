@@ -30,5 +30,29 @@
     "location": "New York, NY",
     "description": "Modern loft right in the heart of the Big Apple.",
     "price": 950
+  },
+  {
+    "id": 5,
+    "title": "Central Park Loft",
+    "type": "loft",
+    "location": "New York, NY",
+    "description": "Modern industrial loft amidst Central Park vicinity.",
+    "price": 2100
+  },
+  {
+    "id": 6,
+    "title": "Mountain House",
+    "type": "house",
+    "location": "Crested Butte, CO",
+    "description": "Beautiful mountain house in the heart of Colorado.",
+    "price": 1250
+  },
+  {
+    "id": 7,
+    "title": "East Village Room",
+    "type": "room",
+    "location": "New York, NY",
+    "description": "East Village room for rent in a building with many spaces for entertainment, gym and coffee.",
+    "price": 650.25
   }
 ]
