@@ -9,7 +9,7 @@ const Dashboard = ({ children }: DashboardProps) => {
   return (
     <div className="flex flex-col h-screen bg-gradient-to-tl from-amber-200 via-paper to-paper">
       <Header />
-      <main className="flex-1 p-4 overflow-auto bg-yellow">
+      <main className="flex-1 p-4 overflow-auto">
         {children}
       </main>
     </div>
