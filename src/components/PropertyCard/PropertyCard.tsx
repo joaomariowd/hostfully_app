@@ -9,7 +9,7 @@ type PropertyCardProps = {
 
 const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
   return (
-    <div className="rounded overflow-hidden shadow-lg bg-paper">
+    <div className="rounded-md overflow-hidden shadow-lg bg-paper border-primary-light border">
       <div className="w-full h-48 overflow-hidden">
         <img className="w-full h-full object-cover" src={propertyImage(property)} alt={property.title} />
       </div>

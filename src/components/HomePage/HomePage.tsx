@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
   return (
     <>
     <div className="flex align-middle">
-      <GiBlockHouse className="text-primary-dark mr-2 w-8 h-auto" />
+      <GiBlockHouse className="text-neutral-700 mr-2 w-8 h-auto mb-2" />
       <h1>Available Properties</h1>
     </div>
     
