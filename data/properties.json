@@ -1,22 +1,30 @@
 [
   {
     "id": 1,
-    "title": "Beach House"
+    "title": "Daytona Beach House",
+    "location": "Daytona Beach, FL",
+    "description": "Gorgeous 4 bedroom house located in the incredible Daytona Beach, FL. This house is located right on the beach and has the most beautiful view of the ocean.",
+    "price": 1000
   },
   {
     "id": 2,
-    "title": "Countriside House"
+    "title": "Countriside House",
+    "location": "Gruene, TX",
+    "description": "Beautiful countriside house in a cozy small town, equipped with all the facilities that you would expect. The property is amazing and has a lot of space for you to enjoy.",
+    "price": 1200.5
   },
   {
     "id": 3,
-    "title": "London House"
+    "title": "London Loft",
+    "location": "London, UK",
+    "description": "This stylish loft apartment near Battersea Park, South London is all you would expect for your next trip to London.",
+    "price": 1500.75
   },
   {
     "id": 4,
-    "title": "New York Appartment"
-  },
-  {
-    "id": 5,
-    "title": "Wine State"
+    "title": "New York Loft",
+    "location": "New York, NY",
+    "description": "Modern loft right in the heart of the Big Apple.",
+    "price": 950
   }
 ]
