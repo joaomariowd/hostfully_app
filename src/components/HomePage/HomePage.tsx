@@ -5,6 +5,7 @@ import { ItemsSelect as PropertyTypeFilter, PropertyCard } from '..';
 import { SelectChangeEvent } from '@mui/material';
 import { propertyTypes } from '../../utilities';
 import { Property } from '../../@types';
+import BookingModal from '../BookingModal/BookingModal';
 
 const types = propertyTypes(properties);
 
@@ -50,6 +51,7 @@ const HomePage: React.FC = () => {
           ))
         }
       </div>
+      <BookingModal />
     </div>
   );
 };
