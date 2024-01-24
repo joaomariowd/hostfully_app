@@ -11,7 +11,11 @@ export default {
         secondary: "#feee7d",
         "secondary-light": "#fefa9c",
         paper: "#f5f5f5",
-      }
+      },
+      screens: {
+        'portrait': { 'raw': '(orientation: portrait)' },
+        'landscape': { 'raw': '(orientation: landscape)' },
+      },
     },
   },
   plugins: [],

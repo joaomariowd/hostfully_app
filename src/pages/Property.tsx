@@ -29,10 +29,10 @@ const Property = () => {
       }}
       className="flex flex-col items-center justify-center h-56 text-white bg-center bg-no-repeat bg-cover"
     >
-      <div className="text-5xl font-bold">{property?.title}</div>
+      <div className="text-3xl font-bold lg:text-5xl">{property?.title}</div>
       <div className="text-2xl">
         <IoLocationSharp className='inline-block mr-1' />
-        {property.location}, {bookings.length}
+        {property.location}
       </div>
     </Box>
     <TableContainer className="px-8" component={Paper}>

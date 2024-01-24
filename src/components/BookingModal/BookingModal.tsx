@@ -74,7 +74,7 @@ const BookingModal = () => {
       aria-describedby="modal-modal-description"
     >
       <Box
-        className='absolute w-1/2 p-4 transform -translate-x-1/2 border-4 rounded-lg shadow-lg border-primary bg-paper top-1/4 left-1/2 min-h-56'
+        className='absolute w-full p-4 transform -translate-x-1/2 border-4 rounded-lg shadow-lg landscape:top-0 top-1/4 lg:w-1/2 border-primary bg-paper left-1/2 min-h-56'
       >
         <Typography gutterBottom variant="h6" component="div" className='flex justify-between align-middle'>
             <div>
@@ -92,24 +92,26 @@ const BookingModal = () => {
               }} 
             />
           </Typography>
-          <Typography gutterBottom variant="h4" component="h2" color="secondary">
+          <Typography gutterBottom variant="h4" component="h2" color="#999" className='text-center md:text-left'>
             Book now!
           </Typography>
-          <div className="flex gap-8">
-            <DatePicker
-              selected={checkIn}
-              onChange={(dates: [Date | null, Date | null]) => {
-                setErrorMessage(undefined);
-                const [startDate, endDate] = dates as [Date, Date];
-                setCheckIn(startDate);
-                setCheckOut(endDate);
-              }}
-              startDate={checkIn}
-              endDate={checkOut}
-              selectsRange
-              inline
-              minDate={moment().add(1, 'days').toDate()}
-            />
+          <div className="flex flex-col gap-4 lg:gap-8 md:flex-row">
+            <div className='text-center'>
+              <DatePicker
+                selected={checkIn}
+                onChange={(dates: [Date | null, Date | null]) => {
+                  setErrorMessage(undefined);
+                  const [startDate, endDate] = dates as [Date, Date];
+                  setCheckIn(startDate);
+                  setCheckOut(endDate);
+                }}
+                startDate={checkIn}
+                endDate={checkOut}
+                selectsRange
+                inline
+                minDate={moment().add(1, 'days').toDate()}
+              />
+            </div>
 
             <div className='flex-1'>
               <div className="grid grid-cols-2 grid-rows-3 gap-4 mb-4">
@@ -164,7 +166,7 @@ const BookingModal = () => {
                   </Button>
                 </div>
               </div>
-              <div>{bookings.length}</div>
+
               {errorMessage &&
                 <div className="p-2 font-bold text-red-500 bg-red-200 border border-red-500 rounded">
                   {errorMessage}
