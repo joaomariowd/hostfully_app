@@ -10,7 +10,7 @@ export default {
         "primary-dark": "#8eb4d9",
         secondary: "#feee7d",
         "secondary-light": "#fefa9c",
-        paper: "#ffffdc",
+        paper: "#f5f5f5",
       }
     },
   },
