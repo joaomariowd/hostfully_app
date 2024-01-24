@@ -10,7 +10,6 @@ import { Error } from ".";
 
 const Property = () => {
   const [ bookings ] = useBookingsStore((state) => [ state.bookings ]);
-  console.log(bookings);
   const { propertyId } = useParams();
   const error = (
     <Error

@@ -11,20 +11,18 @@ import { Booking } from '../../@types';
 import { Error } from '../../pages';
 
 const BookingModal = () => {
+  const [checkIn, setCheckIn] = useState<Date>();
+  const [checkOut, setCheckOut] = useState<Date>();
   const [errorMessage, setErrorMessage] = useState<string>();
   
   const [
-    booking,
     isOpen,
     property,
-    setBooking,
     setIsOpen,
     setProperty
   ] = useBookingModalStore((state) => [
-    state.booking,
     state.isOpen,
     state.property,
-    state.setBooking,
     state.setIsOpen,
     state.setProperty,
   ]);
@@ -36,20 +34,13 @@ const BookingModal = () => {
 
   const handleClose = () => {
     setProperty(null);
-    setBooking({
-      id: undefined,
-      propertyId: undefined,
-      checkIn: undefined,
-      checkOut: undefined,
-      period: undefined,
-      price: undefined,
-      total: undefined,
-    });
+    setCheckIn(undefined);
+    setCheckOut(undefined);
     setErrorMessage(undefined);
     setIsOpen(false)
   };
 
-  if(!property || !booking) return (
+  if(!property) return (
     <Error
       title='Property not found'
       message='The property you are looking for does not exist.' 
@@ -57,7 +48,7 @@ const BookingModal = () => {
   );
 
   const handleClick = () => {
-    if(!booking.checkIn || !booking.checkOut) {
+    if(!checkIn || !checkOut) {
       setErrorMessage('Please select a date range before proceeding.');
       return;
     }
@@ -65,16 +56,14 @@ const BookingModal = () => {
     const newBooking: Booking = {
       id: bookings.length + 1,
       propertyId: property.id,
-      checkIn: booking.checkIn,
-      checkOut: booking.checkOut,
-      period: numberOfDays(booking.checkIn, booking.checkOut),
+      checkIn: checkIn,
+      checkOut: checkOut,
+      period: numberOfDays(checkIn, checkOut),
       price: property.price,
-      total: property.price * numberOfDays(booking.checkIn, booking.checkOut),
+      total: property.price * numberOfDays(checkIn, checkOut),
     };
     
     setBookings([...bookings, newBooking]);
-    
-    console.log('Booking created:', bookings);
   }
 
   return (
@@ -108,18 +97,15 @@ const BookingModal = () => {
           </Typography>
           <div className="flex gap-8">
             <DatePicker
-              selected={booking.checkIn}
+              selected={checkIn}
               onChange={(dates: [Date | null, Date | null]) => {
                 setErrorMessage(undefined);
-                const [checkIn, checkOut] = dates as [Date, Date];
-                setBooking({
-                  ...booking,
-                  checkIn,
-                  checkOut,
-                });
+                const [startDate, endDate] = dates as [Date, Date];
+                setCheckIn(startDate);
+                setCheckOut(endDate);
               }}
-              startDate={booking.checkIn}
-              endDate={booking.checkOut}
+              startDate={checkIn}
+              endDate={checkOut}
               selectsRange
               inline
               minDate={moment().add(1, 'days').toDate()}
@@ -130,8 +116,8 @@ const BookingModal = () => {
                 <div>
                   <p className="text-lg font-bold text-primary-dark">From:</p>
                   <p className="text-lg">
-                    {booking.checkIn ?
-                      moment(booking.checkIn).format('MMMM Do YYYY')
+                    {checkIn ?
+                      moment(checkIn).format('MMMM Do YYYY')
                       :
                       'Select a date'
                     }
@@ -140,8 +126,8 @@ const BookingModal = () => {
                 <div>
                   <p className="text-lg font-bold text-primary-dark">To:</p>
                   <p className="text-lg">
-                    {booking.checkOut ?
-                      moment(booking.checkOut).format('MMMM Do YYYY')
+                    {checkOut ?
+                      moment(checkOut).format('MMMM Do YYYY')
                       :
                       'Select a date'
                     }
@@ -150,7 +136,7 @@ const BookingModal = () => {
                 <div>
                   <p className="text-lg font-bold text-primary-dark">Period:</p>
                   <p className='text-lg'>
-                    {numberOfDays(booking.checkIn, booking.checkOut)} days
+                    {numberOfDays(checkIn, checkOut)} days
                   </p>
                 </div>
                 <div>
@@ -164,7 +150,7 @@ const BookingModal = () => {
                   Total:
                   </p>
                   <p className="text-lg font-bold">
-                    {formatCurrency(property.price * numberOfDays(booking.checkIn, booking.checkOut))}
+                    {formatCurrency(property.price * numberOfDays(checkIn, checkOut))}
                   </p>
                 </div>
                 <div className='flex'>
