@@ -23,33 +23,33 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <>
-    <div className="flex flex-col justify-between mt-2 mb-8 align-middle md:flex-row md:mt-4 lg:mt-6 md:mb-0">
-        <h1 className='w-fit'>
-          <GiBlockHouse className="inline-block w-8 h-auto mb-2 mr-2 text-neutral-700" />
-          Available Properties
-        </h1>
-        <PropertyTypeFilter
-          title='Type'
-          label='type'
-          list={types}
-          handleChange={handleFilterChange}
-          value={filterValue}
-        />
-    </div>
-    
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {propertiesList
-        .sort((a: Property, b: Property) => a.title.localeCompare(b.title))
-        .map((property) => (
-          <PropertyCard
-            key={property.id}
-            property={property}
+    <div className="p-4">
+      <div className="flex flex-col justify-between mt-2 mb-8 align-middle md:flex-row md:mt-4 lg:mt-6 md:mb-0">
+          <h1 className='w-fit'>
+            <GiBlockHouse className="inline-block w-8 h-auto mb-2 mr-2 text-neutral-700" />
+            Available Properties
+          </h1>
+          <PropertyTypeFilter
+            title='Type'
+            label='type'
+            list={types}
+            handleChange={handleFilterChange}
+            value={filterValue}
           />
-        ))
-      }
+      </div>
+      
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {propertiesList
+          .sort((a: Property, b: Property) => a.title.localeCompare(b.title))
+          .map((property) => (
+            <PropertyCard
+              key={property.id}
+              property={property}
+            />
+          ))
+        }
+      </div>
     </div>
-    </>
   );
 };
 
