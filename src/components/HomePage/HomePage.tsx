@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import properties from '../../../data/properties.json';
 import { GiBlockHouse } from 'react-icons/gi';
 import { ItemsSelect as PropertyTypeFilter, PropertyCard } from '..';
@@ -6,10 +6,11 @@ import { SelectChangeEvent } from '@mui/material';
 import { propertyTypes } from '../../utilities';
 import { Property } from '../../@types';
 
+const types = propertyTypes(properties);
+
 const HomePage: React.FC = () => {
   const [filterValue, setFilterValue] = useState<string>('all');
   const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
-  const types = useMemo(() => propertyTypes(properties), []);
 
   const handleFilterChange = (e: SelectChangeEvent) => {
     setFilterValue(e.target.value);
