@@ -5,8 +5,8 @@ import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import { formatCurrency, propertyImage } from "../utilities";
 import properties from '../../data/properties.json';
 import { IoLocationSharp } from "react-icons/io5";
-import { Error } from "../components";
 import moment from "moment";
+import { Error } from ".";
 
 const Property = () => {
   const [ bookings ] = useBookingsStore((state) => [ state.bookings ]);
