@@ -1,15 +1,14 @@
 import { useParams } from "react-router-dom"
 import useBookingsStore from "../stores/bookings";
-import { Booking } from "../@types";
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { formatCurrency, propertyImage } from "../utilities";
+import { Box } from "@mui/material";
+import { propertyImage } from "../utilities";
 import properties from '../../data/properties.json';
 import { IoLocationSharp } from "react-icons/io5";
-import moment from "moment";
 import { Error } from ".";
+import BookingsTable from "../components/BookingsTable/BookingsTable";
 
 const Property = () => {
-  const [ bookings ] = useBookingsStore((state) => [ state.bookings ]);
+  const [ bookings, setBookings ] = useBookingsStore((state) => [ state.bookings, state.setBookings ]);
   const { propertyId } = useParams();
   const error = (
     <Error
@@ -17,9 +16,17 @@ const Property = () => {
       message='The property you are looking for does not exist.' 
     />
   );
+
   if (!propertyId) return error;
   const property = properties.find((property) => property.id === parseInt(propertyId));
   if (!property) return error;
+
+  const propertyBookings = bookings.filter((booking) => booking.propertyId === parseInt(propertyId));
+
+  const handleBookingDelete = (bookingId: number) => {
+    const newBookings = bookings.filter((booking) => booking.id !== bookingId);
+    setBookings(newBookings);
+  }
 
   return (
     <div className="py-4">
@@ -35,34 +42,12 @@ const Property = () => {
         {property.location}
       </div>
     </Box>
-    <TableContainer className="px-8" component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Booking #</TableCell>
-            <TableCell>Price</TableCell>
-            <TableCell>Period</TableCell>
-            <TableCell>Total</TableCell>
-            <TableCell>Check-in</TableCell>
-            <TableCell>Check-out</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {bookings
-            .filter((booking: Booking) => booking.propertyId === parseInt(propertyId))
-            .map((booking: Booking) => (
-              <TableRow key={booking.id}>
-                <TableCell>{booking.id}</TableCell>
-                <TableCell>{booking.price}</TableCell>
-                <TableCell>{booking.period}</TableCell>
-                <TableCell>{formatCurrency(booking.total)}</TableCell>
-                <TableCell>{moment(booking.checkIn).format('MMMM Do YYYY')}</TableCell>
-                <TableCell>{moment(booking.checkOut).format('MMMM Do YYYY')}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-      </Table>
-    </TableContainer>
+    {propertyBookings.length > 0 ? (
+      <BookingsTable propertyId={propertyId} bookings={propertyBookings} handleDelete={handleBookingDelete} />
+    ) :
+      <div className="p-4 bg-paper">No bookings for this property.</div>
+    }
+
     </div>
   )
 }
