@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import properties from '../../../data/properties.json';
+import properties from '../../data/properties.json';
 import { GiBlockHouse } from 'react-icons/gi';
-import { ItemsSelect as PropertyTypeFilter, PropertyCard } from '..';
+import { ItemsSelect as PropertyTypeFilter, PropertyCard } from '../components';
 import { SelectChangeEvent } from '@mui/material';
-import { propertyTypes } from '../../utilities';
-import { Property } from '../../@types';
-import BookingModal from '../BookingModal/BookingModal';
+import { propertyTypes } from '../utilities';
+import { Property } from '../@types';
+import BookingModal from '../components/BookingModal/BookingModal';
 
 const types = propertyTypes(properties);
 
-const HomePage: React.FC = () => {
+const Home: React.FC = () => {
   const [filterValue, setFilterValue] = useState<string>('all');
   const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
 
@@ -56,4 +56,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default Home;

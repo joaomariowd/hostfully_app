@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom"
-import useBookingsStore from "../../stores/bookings";
-import { Booking } from "../../@types";
+import useBookingsStore from "../stores/bookings";
+import { Booking } from "../@types";
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { formatCurrency, propertyImage } from "../../utilities";
-import properties from '../../../data/properties.json';
+import { formatCurrency, propertyImage } from "../utilities";
+import properties from '../../data/properties.json';
 import { IoLocationSharp } from "react-icons/io5";
-import { Error } from "..";
+import { Error } from "../components";
 import moment from "moment";
 
 const Property = () => {
