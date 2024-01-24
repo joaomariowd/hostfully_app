@@ -18,14 +18,14 @@ const Header = () => {
       <nav>
         <ul className="sm:flex">
           <li
-            className="relative p-4 text-lg font-bold cursor-pointer sm:mr-4"
+            className="relative p-4 text-lg cursor-pointer sm:mr-4 hover:text-primary-dark hover:font-bold"
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
             onClick={() => setIsOpen(!isOpen)}
           >
             Properties
             <ul className={clsx(
-              "absolute left-0 z-50 p-2 mt-2 space-y-2 text-sm font-normal rounded-md text-primary-dark bg-paper group-hover:block",
+              "absolute left-0 z-50 mt-2 space-y-2 text-sm font-normal rounded-md text-primary-dark bg-paper",
                 { 
                   'block': isOpen,
                   'hidden': !isOpen,
@@ -33,10 +33,11 @@ const Header = () => {
               )}
             >
               {properties.map((property: Property) => (
-                <li key={property.id} className=' w-fit'>
+                <li key={property.id} className='w-full rounded hover:bg-primary-light hover:text-neutral-600 active:text-gold'>
                   <Link
                     to={`/properties/${property.id}`}
                     onClick={() => setIsOpen(false)}
+                    className='block w-full h-full p-3 min-w-36'
                   >
                     {property.title}
                   </Link>

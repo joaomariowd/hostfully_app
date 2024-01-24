@@ -8,7 +8,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
 import useBookingsStore from '../../stores/bookings';
 import { Booking } from '../../@types';
-import { Error } from '../../pages';
 
 const BookingModal = () => {
   const [checkIn, setCheckIn] = useState<Date>();
@@ -40,12 +39,7 @@ const BookingModal = () => {
     setIsOpen(false)
   };
 
-  if(!property) return (
-    <Error
-      title='Property not found'
-      message='The property you are looking for does not exist.' 
-    />
-  );
+  if(!property) return;
 
   const handleClick = () => {
     if(!checkIn || !checkOut) {
@@ -64,6 +58,7 @@ const BookingModal = () => {
     };
     
     setBookings([...bookings, newBooking]);
+    handleClose();
   }
 
   return (
@@ -74,7 +69,7 @@ const BookingModal = () => {
       aria-describedby="modal-modal-description"
     >
       <Box
-        className='absolute w-full p-4 transform -translate-x-1/2 border-4 rounded-lg shadow-lg landscape:top-0 top-1/4 lg:w-1/2 border-primary bg-paper left-1/2 min-h-56'
+        className='absolute w-full p-4 transform -translate-x-1/2 border-4 rounded-lg shadow-lg landscape:top-0 landscape:md:top-1/4 top-1/4 lg:w-1/2 border-primary bg-paper left-1/2 min-h-56'
       >
         <Typography gutterBottom variant="h6" component="div" className='flex justify-between align-middle'>
             <div>

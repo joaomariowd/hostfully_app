@@ -29,8 +29,8 @@ const Property = () => {
       }}
       className="flex flex-col items-center justify-center h-56 text-white bg-center bg-no-repeat bg-cover"
     >
-      <div className="text-3xl font-bold lg:text-5xl">{property?.title}</div>
-      <div className="text-2xl">
+      <div className="p-2 text-3xl font-bold bg-gray-300 bg-opacity-25 lg:text-5xl">{property?.title}</div>
+      <div className="p-2 text-2xl bg-gray-300 bg-opacity-25">
         <IoLocationSharp className='inline-block mr-1' />
         {property.location}
       </div>

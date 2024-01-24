@@ -1,15 +1,16 @@
 import React from 'react';
 import { formatCurrency, propertyImage } from '../../utilities';
 import { IoLocationSharp } from 'react-icons/io5';
-import { Card, CardActionArea, CardContent, CardMedia, Chip, Typography } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Chip, Typography, capitalize } from '@mui/material';
 import { Property } from '../../@types';
 import useBookingModalStore from '../../stores/bookingModal';
 
 type PropertyCardProps = {
   property: Property;
+  noOfBookings: number;
 }
 
-const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
+const PropertyCard: React.FC<PropertyCardProps> = ({ property, noOfBookings }) => {
   const [setIsOpen, setProperty] = useBookingModalStore((state) => [state.setIsOpen, state.setProperty]);
 
   const handleClick = () => {
@@ -18,11 +19,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
   }
 
   return (
-    <Card>
+    <Card className="flex flex-col h-full">
       <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
-          className="object-cover w-full h-48"
+          className="object-cover w-full h-56"
           image={propertyImage(property)}
           alt={property.title}
         />
@@ -46,8 +47,29 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           <Typography variant="body2" color="text.secondary">
             {property.description}
           </Typography>
+          
         </CardContent>
+        
       </CardActionArea>
+      <div className="flex items-center p-4 mt-auto bg-blue-50 min-h-12">
+        <div>
+        {noOfBookings > 0 &&
+          <p className='text-sm'>
+            <span className="font-bold">{noOfBookings}</span>
+            {noOfBookings === 1 ? " booking" : ` bookings`}
+          </p>
+        }
+        </div>
+        <div className='ml-auto'>
+          <Chip
+            label={capitalize(property.type)}
+            variant="outlined"
+            sx={{
+              borderColor: 'primary.main',
+            }} 
+          />
+          </div>
+      </div>
     </Card>
   );
 };

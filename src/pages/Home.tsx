@@ -6,12 +6,14 @@ import { SelectChangeEvent } from '@mui/material';
 import { propertyTypes } from '../utilities';
 import { Property } from '../@types';
 import BookingModal from '../components/BookingModal/BookingModal';
+import useBookingsStore from '../stores/bookings';
 
 const types = propertyTypes(properties);
 
 const Home: React.FC = () => {
   const [filterValue, setFilterValue] = useState<string>('all');
   const [propertiesList, setPropertiesList] = useState<Property[]>(properties);
+  const [ bookings ] = useBookingsStore((state) => [ state.bookings ]);
 
   const handleFilterChange = (e: SelectChangeEvent) => {
     setFilterValue(e.target.value);
@@ -47,6 +49,7 @@ const Home: React.FC = () => {
             <PropertyCard
               key={property.id}
               property={property}
+              noOfBookings={bookings.filter((booking) => booking.propertyId === property.id).length}
             />
           ))
         }
