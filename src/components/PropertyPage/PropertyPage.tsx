@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom"
-import useReservationsStore from "../../stores/bookings";
+import useBookingsStore from "../../stores/bookings";
 import { Booking } from "../../@types";
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { propertyImage } from "../../utilities";
+import { formatCurrency, propertyImage } from "../../utilities";
 import properties from '../../../data/properties.json';
 import { IoLocationSharp } from "react-icons/io5";
 import { Error } from "..";
+import moment from "moment";
 
 const Property = () => {
-  const [ bookings ] = useReservationsStore((state) => [ state.bookings ]);
+  const [ bookings ] = useBookingsStore((state) => [ state.bookings ]);
+  console.log(bookings);
   const { propertyId } = useParams();
   const error = (
     <Error
@@ -31,7 +33,7 @@ const Property = () => {
       <div className="text-5xl font-bold">{property?.title}</div>
       <div className="text-2xl">
         <IoLocationSharp className='inline-block mr-1' />
-        {property.location}
+        {property.location}, {bookings.length}
       </div>
     </Box>
     <TableContainer className="px-8" component={Paper}>
@@ -39,9 +41,8 @@ const Property = () => {
         <TableHead>
           <TableRow>
             <TableCell>Booking #</TableCell>
-            <TableCell>Guests</TableCell>
             <TableCell>Price</TableCell>
-            <TableCell>Days</TableCell>
+            <TableCell>Period</TableCell>
             <TableCell>Total</TableCell>
             <TableCell>Check-in</TableCell>
             <TableCell>Check-out</TableCell>
@@ -53,12 +54,11 @@ const Property = () => {
             .map((booking: Booking) => (
               <TableRow key={booking.id}>
                 <TableCell>{booking.id}</TableCell>
-                <TableCell>{booking.guests}</TableCell>
                 <TableCell>{booking.price}</TableCell>
-                <TableCell>2</TableCell>
-                <TableCell>200</TableCell>
-                <TableCell>{booking.checkIn}</TableCell>
-                <TableCell>{booking.checkOut}</TableCell>
+                <TableCell>{booking.period}</TableCell>
+                <TableCell>{formatCurrency(booking.total)}</TableCell>
+                <TableCell>{moment(booking.checkIn).format('MMMM Do YYYY')}</TableCell>
+                <TableCell>{moment(booking.checkOut).format('MMMM Do YYYY')}</TableCell>
               </TableRow>
             ))}
           </TableBody>

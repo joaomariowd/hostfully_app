@@ -29,11 +29,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         <CardContent>
           <Typography gutterBottom variant="h6" component="div" className='flex justify-between align-middle'>
             <div>
-            <p className="font-bold text-primary-dark">{property.title}</p>
-            <p className="mb-2 text-xs text-gray-500">
-              <IoLocationSharp className='inline-block mr-1 text-gray-500' />
-              {property.location}
-            </p>
+              <p className="font-bold text-primary-dark">{property.title}</p>
+              <p className="mb-2 text-xs text-gray-500">
+                <IoLocationSharp className='inline-block mr-1 text-gray-500' />
+                {property.location}
+              </p>
             </div>
             <Chip
               label={formatCurrency(property.price)}
