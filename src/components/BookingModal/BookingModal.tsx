@@ -4,11 +4,11 @@ import { IoLocationSharp } from 'react-icons/io5';
 import { formatCurrency, numberOfDays } from '../../utilities';
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
-import { Error } from '..';
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
 import useBookingsStore from '../../stores/bookings';
 import { Booking } from '../../@types';
+import { Error } from '../../pages';
 
 const BookingModal = () => {
   const [errorMessage, setErrorMessage] = useState<string>();

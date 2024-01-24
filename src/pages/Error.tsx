@@ -29,4 +29,4 @@ const Error = ({ title, message}: ErrorProps) => {
   )
 }
 
-export default Error
+export default Error;
