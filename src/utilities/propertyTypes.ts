@@ -1,6 +1,5 @@
+import { Item, Property } from '../@types';
 import { capitalize } from './capitalize';
-import { Item } from '../@types/FilterItem';
-import { Property } from '../@types/Property';
 
 export const propertyTypes = (properties: Property[]) => {
   const types = properties.map(property => ({ text: property.type, title: capitalize(property.type) }));

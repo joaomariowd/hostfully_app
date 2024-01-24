@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Dashboard, HomePage } from './components';
+import { Dashboard, HomePage, Property } from './components';
 import './App.css';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <Dashboard>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/properties/:id" element={<Property />} />
         </Routes>
       </Dashboard>
     </Router>
