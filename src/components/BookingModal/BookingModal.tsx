@@ -55,11 +55,10 @@ const BookingModal = () => {
     setIsOpen(false)
   };
 
-  if(!booking) return;
   if(!property) return;
 
   const handleNewBooking = () => {
-    if(!checkIn || !checkOut) {
+    if(!checkIn || !checkOut || !property) {
       setErrorMessage('Please select a date range before proceeding.');
       return;
     }
@@ -79,7 +78,7 @@ const BookingModal = () => {
   }
 
   const handleEditBooking = () => {
-    if(!checkIn || !checkOut) {
+    if(!checkIn || !checkOut || !booking) {
       setErrorMessage('Please select a date range before proceeding.');
       return;
     }
@@ -193,7 +192,7 @@ const BookingModal = () => {
                     variant="contained"
                     color="primary"
                     className='w-fit'
-                    onClick={handleClose}
+                    onClick={() => handleClose()}
                   >
                     Cancel
                   </Button>

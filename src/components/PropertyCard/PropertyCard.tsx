@@ -11,9 +11,18 @@ type PropertyCardProps = {
 }
 
 const PropertyCard: React.FC<PropertyCardProps> = ({ property, noOfBookings }) => {
-  const [setIsOpen, setProperty] = useBookingModalStore((state) => [state.setIsOpen, state.setProperty]);
+  const [
+    setIsOpen,
+    setMode,
+    setProperty
+  ] = useBookingModalStore((state) => [
+    state.setIsOpen,
+    state.setMode,
+    state.setProperty
+  ]);
 
   const handleClick = () => {
+    setMode('create');
     setProperty(property);
     setIsOpen(true);
   }
