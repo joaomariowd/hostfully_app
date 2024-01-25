@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import appLogo from '/logo.svg';
+import appLogo from '../../images/logo.svg';
 import { Property } from '../../@types';
 import properties from '../../../data/properties.json';
 import { useState } from 'react';
