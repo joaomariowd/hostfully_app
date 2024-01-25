@@ -12,5 +12,5 @@ export const verifyBookedInterval = (checkIn: Date, checkOut: Date, bookedDates:
 
   const sDates = dates.map((date) => date.toDateString());
   const sBookedDates = bookedDates.map((date) => date.toDateString());
-  return sDates.filter((date) => sBookedDates.includes(date)).length > 0;
+  return sDates.some((date) => sBookedDates.includes(date));
 }
