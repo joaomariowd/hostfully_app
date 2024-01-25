@@ -19,6 +19,7 @@ const BookingModal = () => {
     isOpen,
     mode,
     property,
+    setBookingId,
     setIsOpen,
     setMode,
     setProperty
@@ -27,6 +28,7 @@ const BookingModal = () => {
     state.isOpen,
     state.mode,
     state.property,
+    state.setBookingId,
     state.setIsOpen,
     state.setMode,
     state.setProperty,
@@ -47,6 +49,7 @@ const BookingModal = () => {
   }, [booking, mode]);
 
   const handleClose = () => {
+    setBookingId(null);
     setProperty(null);
     setCheckIn(undefined);
     setCheckOut(undefined);
