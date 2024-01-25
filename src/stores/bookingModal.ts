@@ -1,31 +1,28 @@
 import { create } from "zustand";
-import { BookingDTO, Property } from "../@types";
+import { Property } from "../@types";
 
 type State = {
-  booking: BookingDTO | null;
+  bookingId: number | null;
   isOpen: boolean;
+  mode: "create" | "edit";
   property: Property | null;
 };
 
 type Actions = {
-  setBooking: (booking: State["booking"]) => void;
+  setBookingId: (bookingId: State["bookingId"]) => void;
   setIsOpen: (isOpen: State["isOpen"]) => void;
+  setMode: (mode: State["mode"]) => void;
   setProperty: (property: State["property"]) => void;
 };
 
 const useBookingModalStore = create<State & Actions>((set) => ({
-  booking: {
-    id: undefined,
-    propertyId: undefined,
-    checkIn: undefined,
-    checkOut: undefined,
-    price: undefined,
-    total: undefined,
-  },
+  bookingId: null,
   isOpen: false,
+  mode: "create",
   property: null,
-  setBooking: (booking) => set({ booking }),
+  setBookingId: (bookingId) => set({ bookingId }),
   setIsOpen: (isOpen) => set({ isOpen }),
+  setMode: (mode) => set({ mode }),
   setProperty: (property) => set({ property }),
 }));
 

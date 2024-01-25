@@ -1,8 +1,8 @@
 import { Box, Button, Chip, Modal, Typography } from '@mui/material';
 import useBookingModalStore from '../../stores/bookingModal';
 import { IoLocationSharp } from 'react-icons/io5';
-import { formatCurrency, numberOfDays } from '../../utilities';
-import { useState } from 'react';
+import { formatCurrency, newBookingId, numberOfDays } from '../../utilities';
+import { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
@@ -15,14 +15,20 @@ const BookingModal = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
   
   const [
+    bookingId,
     isOpen,
+    mode,
     property,
     setIsOpen,
+    setMode,
     setProperty
   ] = useBookingModalStore((state) => [
+    state.bookingId,
     state.isOpen,
+    state.mode,
     state.property,
     state.setIsOpen,
+    state.setMode,
     state.setProperty,
   ]);
 
@@ -31,24 +37,35 @@ const BookingModal = () => {
     state.setBookings,
   ]);
 
+  const booking = bookings.find((booking) => booking.id === bookingId);
+
+  useEffect(() => {
+    if (mode === 'edit') {
+      setCheckIn(booking?.checkIn);
+      setCheckOut(booking?.checkOut);
+    }
+  }, [booking, mode]);
+
   const handleClose = () => {
     setProperty(null);
     setCheckIn(undefined);
     setCheckOut(undefined);
     setErrorMessage(undefined);
+    setMode('create');
     setIsOpen(false)
   };
 
+  if(!booking) return;
   if(!property) return;
 
-  const handleClick = () => {
+  const handleNewBooking = () => {
     if(!checkIn || !checkOut) {
       setErrorMessage('Please select a date range before proceeding.');
       return;
     }
 
     const newBooking: Booking = {
-      id: bookings.length + 1,
+      id: newBookingId(bookings),
       propertyId: property.id,
       checkIn: checkIn,
       checkOut: checkOut,
@@ -60,6 +77,19 @@ const BookingModal = () => {
     setBookings([...bookings, newBooking]);
     handleClose();
   }
+
+  const handleEditBooking = () => {
+    if(!checkIn || !checkOut) {
+      setErrorMessage('Please select a date range before proceeding.');
+      return;
+    }
+
+    booking.checkIn = checkIn;
+    booking.checkOut = checkOut;
+    booking.period = numberOfDays(checkIn, checkOut);
+    booking.total = property.price * numberOfDays(checkIn, checkOut);
+    handleClose();
+  };
 
   return (
     <Modal
@@ -88,7 +118,7 @@ const BookingModal = () => {
             />
           </Typography>
           <Typography gutterBottom variant="h4" component="h2" color="#999" className='text-center md:text-left'>
-            Book now!
+            {mode === "create" ? "Book now!" : "Edit booking"}
           </Typography>
           <div className="flex flex-col gap-4 lg:gap-8 md:flex-row">
             <div className='text-center'>
@@ -150,14 +180,22 @@ const BookingModal = () => {
                     {formatCurrency(property.price * numberOfDays(checkIn, checkOut))}
                   </p>
                 </div>
-                <div className='flex'>
+                <div className='flex gap-2'>
                   <Button
                     variant="contained"
                     color="secondary"
-                    className='w-full'
-                    onClick={handleClick}
+                    className='w-fit'
+                    onClick={mode === "create" ? handleNewBooking : handleEditBooking}
                   >
                     Proceed
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className='w-fit'
+                    onClick={handleClose}
+                  >
+                    Cancel
                   </Button>
                 </div>
               </div>

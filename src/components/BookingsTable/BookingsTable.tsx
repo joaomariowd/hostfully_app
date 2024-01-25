@@ -2,14 +2,16 @@ import { TableCell, TableContainer, TableHead, TableRow, Table, Paper, TableBody
 import { Booking } from '../../@types';
 import { formatCurrency } from '../../utilities';
 import moment from 'moment';
+import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 
 type BookingsTableProps = {
   propertyId: string;
   bookings: Booking[];
   handleDelete: (bookingId: number) => void;
+  handleEdit: (bookingId: number) => void;
 }
 
-const BookingsTable = ({ propertyId, bookings, handleDelete }: BookingsTableProps) => {
+const BookingsTable = ({ propertyId, bookings, handleDelete, handleEdit }: BookingsTableProps) => {
   return (
     <TableContainer className="px-8" component={Paper}>
       <Table className="max-w-fit">
@@ -36,14 +38,24 @@ const BookingsTable = ({ propertyId, bookings, handleDelete }: BookingsTableProp
                 <TableCell>{moment(booking.checkIn).format('MMMM Do YYYY')}</TableCell>
                 <TableCell>{moment(booking.checkOut).format('MMMM Do YYYY')}</TableCell>
                 <TableCell align="right">
-                  <Button
-                    variant="contained"
-                    color="error"
-                    size="small"
-                    onClick={() => handleDelete(booking.id)}
-                  >
-                    Delete
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      onClick={() => handleEdit(booking.id)}
+                    >
+                      <FaRegEdit />
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      size="small"
+                      onClick={() => handleDelete(booking.id)}
+                    >
+                      <FaRegTrashAlt />
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
