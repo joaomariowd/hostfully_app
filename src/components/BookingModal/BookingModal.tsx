@@ -1,7 +1,7 @@
 import { Box, Button, Chip, Modal, Typography } from '@mui/material';
 import useBookingModalStore from '../../stores/bookingModal';
 import { IoLocationSharp } from 'react-icons/io5';
-import { formatCurrency, newBookingId, numberOfDays } from '../../utilities';
+import { formatCurrency, newBookingId, numberOfDays, propertyBookedDates, propertyBookings } from '../../utilities';
 import { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -134,6 +134,7 @@ const BookingModal = () => {
                 selectsRange
                 inline
                 minDate={moment().add(1, 'days').toDate()}
+                excludeDates={propertyBookedDates(propertyBookings(bookings, property.id), bookingId)}
               />
             </div>
 
@@ -182,7 +183,7 @@ const BookingModal = () => {
                 <div className='flex gap-2'>
                   <Button
                     variant="contained"
-                    color="secondary"
+                    color="info"
                     className='w-fit'
                     onClick={mode === "create" ? handleNewBooking : handleEditBooking}
                   >
@@ -190,7 +191,7 @@ const BookingModal = () => {
                   </Button>
                   <Button
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     className='w-fit'
                     onClick={() => handleClose()}
                   >
