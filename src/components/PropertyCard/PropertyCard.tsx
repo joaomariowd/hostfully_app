@@ -28,7 +28,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, noOfBookings }) =
   }
 
   return (
-    <Card className="flex flex-col h-full">
+    <Card className="flex flex-col h-full" role="property-card">
       <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
