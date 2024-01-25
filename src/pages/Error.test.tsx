@@ -8,7 +8,7 @@ const ErrorComponent = (
   </BrowserRouter>
 );
 
-describe('Error component', () => {
+describe('Error Page', () => {
   it('renders the title and message', () => {
     render(ErrorComponent);
 
