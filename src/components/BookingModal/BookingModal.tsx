@@ -1,7 +1,7 @@
 import { Box, Button, Chip, Modal, Typography } from '@mui/material';
 import useBookingModalStore from '../../stores/bookingModal';
 import { IoLocationSharp } from 'react-icons/io5';
-import { formatCurrency, newBookingId, numberOfDays, propertyBookedDates, propertyBookings } from '../../utilities';
+import { formatCurrency, newBookingId, numberOfDays, propertyBookedDates, propertyBookings, verifyBookedInterval } from '../../utilities';
 import { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -56,6 +56,7 @@ const BookingModal = () => {
   };
 
   if(!property) return;
+  const bookedDates = propertyBookedDates(propertyBookings(bookings, property.id), bookingId);
 
   const handleNewBooking = () => {
     if(!checkIn || !checkOut || !property) {
@@ -126,6 +127,18 @@ const BookingModal = () => {
                 onChange={(dates: [Date | null, Date | null]) => {
                   setErrorMessage(undefined);
                   const [startDate, endDate] = dates as [Date, Date];
+                  if(startDate && endDate && endDate <= startDate) {
+                    setCheckIn(undefined);
+                    setCheckOut(undefined);
+                    setErrorMessage('Please, select valid dates for your reservation.');
+                    return;
+                  }
+                  if(verifyBookedInterval(startDate, endDate, bookedDates)){
+                    setErrorMessage('This date range is not available.');
+                    setCheckIn(undefined);
+                    setCheckOut(undefined);
+                    return;
+                  }
                   setCheckIn(startDate);
                   setCheckOut(endDate);
                 }}
@@ -134,7 +147,7 @@ const BookingModal = () => {
                 selectsRange
                 inline
                 minDate={moment().add(1, 'days').toDate()}
-                excludeDates={propertyBookedDates(propertyBookings(bookings, property.id), bookingId)}
+                excludeDates={bookedDates}
               />
             </div>
 

@@ -11,9 +11,7 @@ export const propertyBookedDates = (bookings: Booking[], bookingId: number | nul
 
   bookings.forEach((booking) => {
     const period = numberOfDays(booking.checkIn, booking.checkOut);
-    bookedDates.push(booking.checkIn);
-    bookedDates.push(booking.checkOut);
-    for (let i = 0; i < period; i++) {
+    for (let i = 0; i <= period; i++) {
       const date = moment(booking.checkIn).clone().add(i, 'days').toDate();
       bookedDates.push(date);
     }
